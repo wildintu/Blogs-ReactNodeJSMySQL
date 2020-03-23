@@ -9,7 +9,7 @@ Query('SELECT * from blogs WHERE id = ?',[id]);
 
 const post = async (title: string, content: string, authorid: number) => {
     let values = [title, content, authorid]
-    Query('INSERT INTO blogs (title, content, authorid) VALUES(?,?,?)', values);
+    return Query('INSERT INTO blogs (title, content, authorid) VALUES(?,?,?)', values);
 }
 
 const put = async (id: number, title: string, content: string, authorid: number) => {
