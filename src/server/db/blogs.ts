@@ -11,7 +11,6 @@ const post = async (title: string, content: string, authorid: number, tagid: num
     let values = [title, content, authorid];
     let tempQuery: any = await Query('INSERT INTO blogs (title, content, authorid) VALUES(?,?,?)', values);
     let insertId: any = Object.entries(tempQuery)[2][1];
-    // console.log(insertId, tagid);
     return Query('INSERT INTO blogtags(blogid,tagid) VALUES(?,?); CALL spBlogTags(?)',[insertId, tagid, insertId])
 }
 
@@ -22,9 +21,6 @@ const put = async (id: number, title: string, content: string, authorid: number)
 
 const del = async (id: number) =>
 Query('DELETE FROM blogs WHERE id =?', [id])
-
-// const btAll = async (blogid: number) =>
-// Query('SELECT * from blogtags WHERE blogid = ?',[blogid]);
 
 export default {
     all,
