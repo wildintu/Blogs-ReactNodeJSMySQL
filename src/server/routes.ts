@@ -32,8 +32,9 @@ router.post('/api/blogs', async (req, res) => {
     let title = req.body.title;
     let content = req.body.content;
     let authorid = parseInt(req.body.authorid, 10);
+    let tagid = parseInt(req.body.tagid, 10)
     try {
-        let blogs = await DB.Blogs.post(title, content, authorid);
+        let blogs = await DB.Blogs.post(title, content, authorid, tagid);
         res.json(blogs);
     } catch(e) {
         console.log(e);
