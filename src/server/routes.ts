@@ -67,4 +67,24 @@ router.delete('/api/blogs/:id?', async (req, res) => {
     }
 })
 
+router.get('/api/tags', async (req, res) => {
+    try {
+        let tags = await DB.Tags.tAll();
+        res.json(tags);
+    } catch(e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
+
+router.get('/api/tags/:blogid', async (req, res) => {
+    try {
+        let tags = await DB.Tags.tOne(parseInt(req.params.blogid, 10));
+        res.json(tags);
+    } catch(e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
+
 export default router;

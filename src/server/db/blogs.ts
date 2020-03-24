@@ -23,6 +23,9 @@ const put = async (id: number, title: string, content: string, authorid: number)
 const del = async (id: number) =>
 Query('DELETE FROM blogs WHERE id =?', [id])
 
+// const btAll = async (blogid: number) =>
+// Query('SELECT * from blogtags WHERE blogid = ?',[blogid]);
+
 export default {
     all,
     one,
