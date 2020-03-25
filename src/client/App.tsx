@@ -1,42 +1,25 @@
-import * as React from 'react';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Blogs from "./Blogs";
+import Blog from "./Blog";
+import Forms from "./Forms";
+import Detail from "./Detail"
 
-class App extends React.Component<IAppProps, IAppState> {
-	constructor(props: IAppProps) {
-		super(props);
-
-		this.state = {
-			blogs: []
-		};
-	}
-
-	async componentDidMount() {
-		try {
-			let r = await fetch('/api/blogs');
-			let blogs = await r.json();
-			this.setState({ blogs });
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	render() {
-		return (
-			<main className="container my-5">
-				<h1 className="text-primary text-center">My Blog</h1>
-				<ul className="list-group">
-					{this.state.blogs.map((blog, index) => {
-						return <li key={index} className="list-group-item">{blog.title}</li>
-					})}
-				</ul>
-			</main>
-		);
-	}
-}
+const App: React.FC<IAppProps> = props => {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/Forms" component={ Forms } />
+        <Route exact path="/Blogs/:id" component={ Detail } />
+        <Route exact path="/Blogs/:id/admin" component={ Blog } />
+        <Route path="/" component={ Blogs } />
+      </Switch>
+    </Router>
+  );
+};
 
 export interface IAppProps {}
 
-export interface IAppState {
-	blogs: Array<{title: string, content: string, authorid: number}>;
-}
+export interface IAppState {}
 
 export default App;
