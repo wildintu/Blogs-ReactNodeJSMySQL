@@ -29,7 +29,7 @@ let Blog: React.FC<IBlogProps> =  ({
               content: content,
               authorid: authorid
             },
-            `/api/Blogs/${id}`,
+            `/api/blogs/${id}`,
             "PUT"
           );
         }
@@ -43,7 +43,7 @@ let Blog: React.FC<IBlogProps> =  ({
               content: content,
               authorid: authorid
             },
-            `/api/Blogs/${id}`,
+            `/api/blogs/${id}`,
             "DELETE"
           );
         }
@@ -76,9 +76,9 @@ let Blog: React.FC<IBlogProps> =  ({
               value={title}
               onChange={e => handleChange(e.target.value, "title")}
             />
-            <small id="userMsg" className="form-text text-muted">
+            {/* <small id="userMsg" className="form-text text-muted">
               We plan to stalk you.
-            </small>
+            </small> */}
           </div>
           <div className="form-group col-sm-4">
             <label htmlFor="msg">Content</label>

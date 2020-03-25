@@ -10,7 +10,7 @@ const App: React.FC<IAppProps> = props => {
     <Router>
       <Switch>
         <Route exact path="/Forms" component={ Forms } />
-        <Route exact path="/Blogs/:id" component={ Detail } />
+        <Route exact path="/Blogs/:id/details" component={ Detail } />
         <Route exact path="/Blogs/:id/admin" component={ Blog } />
         <Route path="/" component={ Blogs } />
       </Switch>

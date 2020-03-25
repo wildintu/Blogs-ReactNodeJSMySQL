@@ -26,12 +26,21 @@ const Blogs: React.FC<IBlogsProps> = props => {
                 <main className="container my-5" key={index}>
                     <ul className="list-group" >
                             <li className="list-group-item">{element.title}
-                            {/* <Link to={`/blogs/${element.id}`}
-                            <button type="button" className="btn btn-info d-flex mt-2">Details</button>
-                            </Link> */}
+                            
+                            <Link to={`/blogs/${element.id}/details`}>
+                            <button
+                            type="button"
+                            className="btn btn-info d-flex mt-2">
+                                Details
+                                </button>
+                            </Link>
                             
                             <Link to={`/blogs/${element.id}/admin`}>
-                            <button type="button" className="btn btn-info d-flex mt-2">Edit</button>
+                            <button
+                            type="button"
+                            className="btn btn-info d-flex mt-2">
+                                Edit
+                                </button>
                             </Link>
                             </li>
                         
@@ -45,7 +54,7 @@ const Blogs: React.FC<IBlogsProps> = props => {
 
     useEffect(() => {
         grabBlogs();
-    }, [])
+    }, []);
     
     return (
         <div>
