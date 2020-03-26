@@ -70,7 +70,7 @@ const Blogs: React.FC<IBlogsProps> = props => {
 export interface IBlogsProps {}
 
 export interface IBlogsState {
-	blog: Array<{title: string, content: string, authorid: number, tagid: number}>;
+	blog: Array<{title: string, content: string, authorid: number}>;
 }
 
 export default Blogs;
