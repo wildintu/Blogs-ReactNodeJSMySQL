@@ -10,6 +10,7 @@ let Blog: React.FC<IBlogProps> =  ({
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [authorid, setAuthorid] = useState("");
+    const [tagid, setTagid] = useState("")
 
     let handleChange = (e: string, id: string) => {
         if (id === "title") {
@@ -18,16 +19,19 @@ let Blog: React.FC<IBlogProps> =  ({
           setContent(e);
         } else if (id === "authorid") {
             setAuthorid(e);
+        } else if (id === "tagid") {
+            setTagid(e);
         } 
       };
     
       let handleClick = () => {
-        if (title !== "title" && content !== "content" && authorid !== "authorid") {
+        if (title !== "title" && content !== "content" && authorid !== "authorid" && tagid !== "tagid") {
           Fetch(
             {
               title: title,
               content: content,
               authorid: authorid,
+              tagid: tagid
             },
             `/api/blogs/${id}`,
             "PUT"
@@ -36,12 +40,13 @@ let Blog: React.FC<IBlogProps> =  ({
       };
     
       let handleDelete = () => {
-        if (title !== "title" && content !== "content" && authorid !== "authorid") {
+        if (title !== "title" && content !== "content" && authorid !== "authorid" && tagid !== "tagid") {
           Fetch(
             {
               title: title,
               content: content,
               authorid: authorid,
+              tagid: tagid
             },
             `/api/blogs/${id}`,
             "DELETE"
@@ -53,9 +58,11 @@ let Blog: React.FC<IBlogProps> =  ({
         try {
           let res = await fetch(`/api/blogs/${id}`);
           let ablog = await res.json();
+          console.log(ablog)
           setTitle(ablog.title);
           setContent(ablog.content);
           setAuthorid(ablog.authorid);
+          setTagid(ablog.tagid)
         } catch (error) {
           console.log(error);
         }
@@ -98,6 +105,16 @@ let Blog: React.FC<IBlogProps> =  ({
               id="authorid"
               value={authorid}
               onChange={e => handleChange(e.target.value, "authorid")}
+            />
+          </div>
+          <div className="form-group col-sm-4">
+            <label htmlFor="msg">Tag ID</label>
+            <input
+              type="number"
+              className="form-control"
+              id="tagid"
+              value={tagid}
+              onChange={e => handleChange(e.target.value, "tagid")}
             />
           </div>
           <Link to="/">

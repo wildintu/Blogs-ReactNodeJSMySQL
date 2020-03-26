@@ -27,6 +27,7 @@ const Forms: React.FC<IFormsProps> = props => {
           title: title,
           content: content,
           authorid: authorid,
+          tagid: tagid
         },
         "/api/blogs",
         "POST"
@@ -67,6 +68,16 @@ const Forms: React.FC<IFormsProps> = props => {
           id="authorid"
           value={authorid}
           onChange={e => handleChange(e.target.value, "authorid")}
+        />
+      </div>
+      <div className="form-group col-sm-4">
+        <label htmlFor="msg">Tag ID</label>
+        <input
+          type="text"
+          className="form-control"
+          id="tagid"
+          value={tagid}
+          onChange={e => handleChange(e.target.value, "tagid")}
         />
       </div>
       <Link to="/">
