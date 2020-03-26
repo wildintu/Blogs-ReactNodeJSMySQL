@@ -77,9 +77,9 @@ router.get('/api/tags', async (req, res) => {
     }
 })
 
-router.get('/api/tags/:blogid', async (req, res) => {
+router.get('/api/tags/:tagid', async (req, res) => {
     try {
-        let tags = await DB.Tags.tOne(parseInt(req.params.blogid, 10));
+        let tags = await DB.Tags.tOne(parseInt(req.params.tagid, 10));
         res.json(tags);
     } catch(e) {
         console.log(e);

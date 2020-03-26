@@ -47,7 +47,6 @@ const Blogs: React.FC<IBlogsProps> = props => {
                     </ul>
                 </main>
             );
-
         })
         setBlog(cards);
     }
@@ -71,7 +70,7 @@ const Blogs: React.FC<IBlogsProps> = props => {
 export interface IBlogsProps {}
 
 export interface IBlogsState {
-	blog: Array<{title: string, content: string, authorid: number}>;
+	blog: Array<{title: string, content: string, authorid: number, tagid: number}>;
 }
 
 export default Blogs;

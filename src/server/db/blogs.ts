@@ -5,7 +5,7 @@ const all = async () => {
     return Query(`SELECT *,
     c.name AS tagName from blogtags a
     JOIN blogs b ON b.id = a.blogid
-    JOIN tag c on c.id = a.tagid
+    JOIN tags c on c.id = a.tagid
     JOIN authors d ON d.id = b.authorid
     ORDER BY a.blogid ASC`);
 }

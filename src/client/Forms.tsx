@@ -6,6 +6,7 @@ const Forms: React.FC<IFormsProps> = props => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [authorid, setAuthorid] = useState("");
+  const [tagid, setTagid] = useState("");
 
   let handleChange = (e: string, id: string) => {
     if (id === "title") {
@@ -14,16 +15,19 @@ const Forms: React.FC<IFormsProps> = props => {
       setContent(e);
     } else if (id === "authorid") {
       setAuthorid(e);
+    } else if (id === "tagid") {
+      setTagid(e);
     }
   };
 
   let handleClick = () => {
-    if (title !== "" && content !== "" && authorid !== "") {
+    if (title !== "" && content !== "" && authorid !== "" && tagid !== "") {
       Fetch(
         {
           title: title,
           content: content,
-          authorid: authorid
+          authorid: authorid,
+          tagid: tagid
         },
         "/api/blogs",
         "POST"
@@ -64,6 +68,16 @@ const Forms: React.FC<IFormsProps> = props => {
           id="authorid"
           value={authorid}
           onChange={e => handleChange(e.target.value, "authorid")}
+        />
+      </div>
+      <div className="form-group col-sm-4">
+        <label htmlFor="msg">Tag ID</label>
+        <input
+          type="text"
+          className="form-control"
+          id="tagid"
+          value={tagid}
+          onChange={e => handleChange(e.target.value, "tagid")}
         />
       </div>
       <Link to="/">
