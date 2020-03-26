@@ -1,11 +1,23 @@
 import { Connection } from './index';
 import { Query } from './index';
 
-const all = async () => 
-Query('SELECT * from blogs');
+const all = async () => {
+    return Query(`SELECT *,
+    c.name AS tagName from blogtags a
+    JOIN blogs b ON b.id = a.blogid
+    JOIN tag c on c.id = a.tagid
+    JOIN authors d ON d.id = b.authorid
+    ORDER BY a.blogid ASC`);
+}
 
-const one = async (id: number) =>
-Query('SELECT * from blogs WHERE id = ?',[id]);
+const one = async (id: number) => {
+    return Query(`SELECT *,
+    c.name AS tagName from blogtags a
+    JOIN blogs b ON b.id = a.blogid 
+    JOIN tags c ON c.id = a.tagid 
+    JOIN authors d on d.id = b.authorid 
+    WHERE b.id = ?`,[id]);
+}
 
 const post = async (title: string, content: string, authorid: number, tagid: number) => {
     let values = [title, content, authorid];
