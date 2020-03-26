@@ -21,7 +21,7 @@ router.get('/api/blogs', async (req, res) => {
 router.get('/api/blogs/:id', async (req, res) => {
     try {
         let blogs = await DB.Blogs.one(parseInt(req.params.id, 10));
-        res.json(blogs);
+        res.json(blogs[0]);
     } catch(e) {
         console.log(e);
         res.sendStatus(500);

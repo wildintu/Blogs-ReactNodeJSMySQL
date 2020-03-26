@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, RouteComponentProps, Link } from "react-router-dom";
+import { RouteComponentProps, Link } from "react-router-dom";
 import Fetch from "./Fetch";
 
 let Blog: React.FC<IBlogProps> =  ({
@@ -7,10 +7,12 @@ let Blog: React.FC<IBlogProps> =  ({
         params: { id }
       }
 }) => {
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [authorid, setAuthorid] = useState("");
-    const [tagid, setTagid] = useState("")
+    const [title, setTitle] = useState<string>("");
+    const [content, setContent] = useState<string>("");
+    const [authorid, setAuthorid] = useState<string>("");
+    const [tagid, setTagid] = useState<string>("")
+
+    // console.log(id)
 
     let handleChange = (e: string, id: string) => {
         if (id === "title") {
@@ -105,16 +107,6 @@ let Blog: React.FC<IBlogProps> =  ({
               id="authorid"
               value={authorid}
               onChange={e => handleChange(e.target.value, "authorid")}
-            />
-          </div>
-          <div className="form-group col-sm-4">
-            <label htmlFor="msg">Tag ID</label>
-            <input
-              type="number"
-              className="form-control"
-              id="tagid"
-              value={tagid}
-              onChange={e => handleChange(e.target.value, "tagid")}
             />
           </div>
           <Link to="/">

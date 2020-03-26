@@ -20,6 +20,6 @@ const App: React.FC<IAppProps> = props => {
 
 export interface IAppProps {}
 
-export interface IAppState {}
+// export interface IAppState {}
 
 export default App;
