@@ -1,9 +1,10 @@
-import { Connection } from './index';
 import { Query } from './index';
 
 const all = async () => {
     return Query(`SELECT *,
-    c.name AS tagName from blogtags a
+    b._created AS datecreated,
+    c.name AS tagName
+    from blogtags a
     JOIN blogs b ON b.id = a.blogid
     JOIN tags c on c.id = a.tagid
     JOIN authors d ON d.id = b.authorid
@@ -12,7 +13,9 @@ const all = async () => {
 
 const one = async (id: number) => {
     return Query(`SELECT *,
-    c.name AS tagName from blogtags a
+    b._created AS datecreated,
+    c.name AS tagName
+    from blogtags a
     JOIN blogs b ON b.id = a.blogid 
     JOIN tags c ON c.id = a.tagid 
     JOIN authors d on d.id = b.authorid 

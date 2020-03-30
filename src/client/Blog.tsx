@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps, Link } from "react-router-dom";
 import Fetch from "./Fetch";
+import {IBlogs, months} from './Blogs';
 
 let Blog: React.FC<IBlogProps> =  ({
     match: {
@@ -9,10 +10,8 @@ let Blog: React.FC<IBlogProps> =  ({
 }) => {
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
-    const [authorid, setAuthorid] = useState<string>("");
-    const [tagid, setTagid] = useState<string>("")
-
-    // console.log(id)
+    const [authorid, setAuthorid] = useState<number>();
+    const [tagid, setTagid] = useState<number>()
 
     let handleChange = (e: string, id: string) => {
         if (id === "title") {
@@ -20,14 +19,14 @@ let Blog: React.FC<IBlogProps> =  ({
         } else if (id === "content") {
           setContent(e);
         } else if (id === "authorid") {
-            setAuthorid(e);
+            setAuthorid(parseInt(e,10));
         } else if (id === "tagid") {
-            setTagid(e);
+            setTagid(parseInt(e,10));
         } 
       };
     
       let handleClick = () => {
-        if (title !== "title" && content !== "content" && authorid !== "authorid" && tagid !== "tagid") {
+        if (title !== "title" && content !== "content") {
           Fetch(
             {
               title: title,
@@ -42,7 +41,7 @@ let Blog: React.FC<IBlogProps> =  ({
       };
     
       let handleDelete = () => {
-        if (title !== "title" && content !== "content" && authorid !== "authorid" && tagid !== "tagid") {
+        if (title !== "title" && content !== "content") {
           Fetch(
             {
               title: title,
@@ -59,8 +58,7 @@ let Blog: React.FC<IBlogProps> =  ({
       let postBlog = async () => {
         try {
           let res = await fetch(`/api/blogs/${id}`);
-          let ablog = await res.json();
-          console.log(ablog)
+          let ablog: IBlogs = await res.json();
           setTitle(ablog.title);
           setContent(ablog.content);
           setAuthorid(ablog.authorid);
@@ -85,9 +83,6 @@ let Blog: React.FC<IBlogProps> =  ({
               value={title}
               onChange={e => handleChange(e.target.value, "title")}
             />
-            {/* <small id="userMsg" className="form-text text-muted">
-              We plan to stalk you.
-            </small> */}
           </div>
           <div className="form-group col-sm-4">
             <label htmlFor="msg">Content</label>
@@ -97,16 +92,6 @@ let Blog: React.FC<IBlogProps> =  ({
               id="content"
               value={content}
               onChange={e => handleChange(e.target.value, "content")}
-            />
-          </div>
-          <div className="form-group col-sm-4">
-            <label htmlFor="msg">Author ID</label>
-            <input
-              type="number"
-              className="form-control"
-              id="authorid"
-              value={authorid}
-              onChange={e => handleChange(e.target.value, "authorid")}
             />
           </div>
           <Link to="/">
@@ -131,7 +116,6 @@ let Blog: React.FC<IBlogProps> =  ({
           </Link>
         </form>
       );
-
 }
 
 

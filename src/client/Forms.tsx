@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Fetch from "./Fetch";
+import {Form, Container} from "react-bootstrap";
+import {IAppProps} from "./App";
 
-const Forms: React.FC<IFormsProps> = props => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [authorid, setAuthorid] = useState("");
-  const [tagid, setTagid] = useState("");
+const Forms: React.FC<IAppProps> = props => {
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [authorid, setAuthorid] = useState<string>("");
+  const [tag, setTag] = useState<string>("");
+  const [tagObject, setTagObject] = useState<any>()
+  const [tagOptions, setTagOptions] = useState<JSX.Element[]>()
 
   let handleChange = (e: string, id: string) => {
     if (id === "title") {
@@ -15,19 +19,18 @@ const Forms: React.FC<IFormsProps> = props => {
       setContent(e);
     } else if (id === "authorid") {
       setAuthorid(e);
-    } else if (id === "tagid") {
-      setTagid(e);
-    }
+    } 
   };
 
   let handleClick = () => {
     if (title !== "" && content !== "" && authorid !== "") {
+      let id: any = tagObject[tag]
       Fetch(
         {
           title: title,
           content: content,
           authorid: authorid,
-          tagid: tagid
+          tagid: id
         },
         "/api/blogs",
         "POST"
@@ -35,7 +38,41 @@ const Forms: React.FC<IFormsProps> = props => {
     }
   };
 
+  let handleTagchange = (event: string) => {
+    setTag(event);
+}
+
+let fetchTags = async () => {
+  try {
+      let response: Response = await fetch('/api/tags');
+      let json: Array<ITags> = await response.json();
+      makeOptions(json);
+  } catch (error) {
+      if (error) throw error;
+  }
+}
+
+let makeOptions = (json: Array<ITags>) => {
+  let tagObject: any = {}
+  let options = json.map((element) => {
+      let id = element.id;
+      let tagName = element.name;
+      tagObject[tagName] = id;
+      return (
+          <option key={element.id}>{element.name}</option>
+      )
+  })
+  console.log(json)
+
+  setTagObject(tagObject);
+  setTagOptions(options);
+}
+useEffect(() => {
+  fetchTags();
+}, [])
+
   return (
+    <Container>
     <form>
       <div className="form-group col-sm-4">
         <label htmlFor="name">Title</label>
@@ -46,9 +83,6 @@ const Forms: React.FC<IFormsProps> = props => {
           value={title}
           onChange={e => handleChange(e.target.value, "title")}
         />
-        {/* <small id="userMsg" className="form-text text-muted">
-          We plan to stalk you.
-        </small> */}
       </div>
       <div className="form-group col-sm-4">
         <label htmlFor="msg">Content</label>
@@ -70,15 +104,16 @@ const Forms: React.FC<IFormsProps> = props => {
           onChange={e => handleChange(e.target.value, "authorid")}
         />
       </div>
-      <div className="form-group col-sm-4">
-        <label htmlFor="msg">Tag ID</label>
-        <input
-          type="text"
-          className="form-control"
-          id="tagid"
-          value={tagid}
-          onChange={e => handleChange(e.target.value, "tagid")}
-        />
+      <div>
+      <Form.Group className="col-sm-4" controlId="tag">
+    <Form.Label>Tag</Form.Label>
+    <Form.Control as="select"
+        className=""
+          value={tag}
+          onChange={(event: any) => { handleTagchange(event.target.value) }}>
+            {tagOptions}
+    </Form.Control>
+  </Form.Group>
       </div>
       <Link to="/">
         <button
@@ -91,11 +126,13 @@ const Forms: React.FC<IFormsProps> = props => {
         </button>
       </Link>
     </form>
+    </Container>
   );
 };
 
-export interface IFormsProps {}
-
-export interface IFormsState {}
-
 export default Forms;
+
+export interface ITags {
+  id: string;
+  name: string;
+}
