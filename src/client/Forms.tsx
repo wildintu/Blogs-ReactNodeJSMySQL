@@ -23,7 +23,7 @@ const Forms: React.FC<IAppProps> = props => {
   };
 
   let handleClick = () => {
-    if (title !== "" && content !== "" && authorid !== "") {
+    if (title !== "" && content !== "" && authorid !== "" && tag !== "") {
       let id: any = tagObject[tag]
       Fetch(
         {
@@ -46,6 +46,7 @@ let fetchTags = async () => {
   try {
       let response: Response = await fetch('/api/tags');
       let json: Array<ITags> = await response.json();
+      setTag(json[0].name);
       makeOptions(json);
   } catch (error) {
       if (error) throw error;
@@ -62,7 +63,7 @@ let makeOptions = (json: Array<ITags>) => {
           <option key={element.id}>{element.name}</option>
       )
   })
-  console.log(json)
+  console.log(tagObject)
 
   setTagObject(tagObject);
   setTagOptions(options);
