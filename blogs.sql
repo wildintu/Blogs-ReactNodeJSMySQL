@@ -42,30 +42,30 @@ INSERT INTO `authors` VALUES (1,'Kim','abc@123.com','2020-03-23 13:08:44'),(2,'L
 UNLOCK TABLES;
 
 --
--- Table structure for table `blogs`
+-- Table structure for table `blogstable`
 --
 
-DROP TABLE IF EXISTS `blogs`;
+DROP TABLE IF EXISTS `blogstable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `blogs` (
+CREATE TABLE `blogstable` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `content` varchar(100) NOT NULL,
   `authorid` int(11) NOT NULL,
   `_created` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `blogs`
+-- Dumping data for table `blogstable`
 --
 
-LOCK TABLES `blogs` WRITE;
-/*!40000 ALTER TABLE `blogs` DISABLE KEYS */;
-INSERT INTO `blogs` VALUES (4,'Taffy','Woof',3,'2020-03-24 08:49:14'),(6,'hello world','yeah yeah yeah yeah',3,'2020-03-25 16:14:35'),(7,'what in the world','hello world',3,'2020-03-25 16:37:30'),(11,'but then i told him','sdfjsfjsajfk',2,'2020-03-25 16:54:43'),(12,'queen ','yup',3,'2020-03-25 20:13:22'),(14,'Whatever you must','This is how we do it',3,'2020-03-30 13:20:43'),(15,'one more time','kdjfajsfijweifajowe',3,'2020-03-30 14:43:56'),(16,'dddddd','ddddddd',1,'2020-03-30 14:57:45'),(17,'new blog','testing',2,'2020-03-30 14:58:22'),(18,'okie dokie','one lsat ime',2,'2020-03-30 15:10:35');
-/*!40000 ALTER TABLE `blogs` ENABLE KEYS */;
+LOCK TABLES `blogstable` WRITE;
+/*!40000 ALTER TABLE `blogstable` DISABLE KEYS */;
+INSERT INTO `blogstable` VALUES (29,'blog 2','will this work',3,'2020-03-31 19:47:50');
+/*!40000 ALTER TABLE `blogstable` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -88,7 +88,7 @@ CREATE TABLE `blogtags` (
 
 LOCK TABLES `blogtags` WRITE;
 /*!40000 ALTER TABLE `blogtags` DISABLE KEYS */;
-INSERT INTO `blogtags` VALUES (1,3),(2,1),(3,1),(4,2),(8,4),(9,3),(10,1),(13,2),(14,2),(15,10),(16,9),(17,5),(18,6);
+INSERT INTO `blogtags` VALUES (1,3),(2,1),(3,1),(4,2),(8,4),(9,3),(10,1),(13,2),(14,2),(15,10),(16,9),(17,5),(18,6),(20,6),(21,10),(22,10),(23,7),(28,1),(29,4),(30,3);
 /*!40000 ALTER TABLE `blogtags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,4 +126,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-30 17:11:09
+-- Dump completed on 2020-03-31 19:55:18
